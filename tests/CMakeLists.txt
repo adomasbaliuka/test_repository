@@ -4,7 +4,7 @@
 # see /opt/local/share/cmake-3.16/Modules/FindGTest.cmake
 #
 
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.16)
 
 # Enable testing. This is not necessary for using GTest,
 # only provides integration with CTest (CMake test suite)

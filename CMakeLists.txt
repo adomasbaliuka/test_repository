@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.16)
 message("CMake version: ${CMAKE_VERSION}")
 project(test-project
         VERSION 0.0.1
