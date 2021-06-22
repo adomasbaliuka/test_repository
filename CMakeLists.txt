@@ -63,7 +63,7 @@ endif ()
 if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git" AND NOT AFF3CT_OVERRIDE_VERSION)
     message(FATAL_ERROR "The '.git' folder can't be found. This program cannot be compiled unless it is cloned "
             "from a Git repository. Please do not download archives and make a Git clone instead.")
-else()
+else ()
     include(GetGitRevisionDescription)
     get_git_head_revision(GIT_REFSPEC GIT_SHA1)
     git_describe(GIT_VERSION "--tags" "--dirty")
@@ -141,4 +141,14 @@ add_subdirectory(src)
 
 #add_subdirectory(examples)
 
+if(BUILD_NOTESTS)
+# Enable testing. This is not necessary for using GTest,
+# only provides integration with CTest (CMake test suite)
+# Note that this line has to be located before adding the sub-directory with the tests.
+# Having this line in the test/CMakeLists.txt file doesn't work (I don't know why).
+enable_testing()
+
 add_subdirectory(tests) # If you comment out this line, the project can build without GTest library installed.
+else()
+    message(INFO "Not building unit tests as per user request.")
+endif(BUILD_NOTESTS)
