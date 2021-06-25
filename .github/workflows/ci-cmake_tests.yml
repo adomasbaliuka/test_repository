@@ -49,4 +49,4 @@ jobs:
 #        if: failure()
         with:
           name: test_results_xml
-          path: ${{runner.workspace}}/build/test-results/**/*.xml
+          path: ${{runner.workspace}}/build/tests/test-results/**/*.xml
