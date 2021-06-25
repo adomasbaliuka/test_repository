@@ -21,6 +21,8 @@ TEST(TestUtils, valgrind_check) {
     int x, y=0;
     if (x == 42) y = 2; // Should give UninitCondition warning!
     else y++;
+    
+    FAIL();
 }
 
 TEST(TestUtils, program_version) {
