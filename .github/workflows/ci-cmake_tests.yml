@@ -45,8 +45,8 @@ jobs:
         run: tree
 
       - name: Configure CMake for coverage
-        run: cmake -S $GITHUB_WORKSPACE -B ${{runner.workspace}}/build-coverage \
-          -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=--coverage -DCMAKE_C_FLAGS=--coverage
+        run: cmake -S $GITHUB_WORKSPACE -B ${{runner.workspace}}/build-coverage -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=--coverage -DCMAKE_C_FLAGS=--coverage
+
       - name: Generate code coverage
         working-directory: ${{runner.workspace}}/build-coverage
         run: |
