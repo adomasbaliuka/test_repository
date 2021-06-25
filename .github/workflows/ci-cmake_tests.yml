@@ -53,7 +53,7 @@ jobs:
           ctest -V
           ls -a
 
-      - Generate Lcov report
+      - name: Generate Lcov report
         uses: daalbano/lcov-action@v1
         with:
           remove_patterns: 3rdparties,benchmarks
