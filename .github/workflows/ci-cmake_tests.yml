@@ -41,11 +41,12 @@ jobs:
         run: GTEST_OUTPUT=xml:test-results/ GTEST_COLOR=1 ctest -V
         
       - name: print tree for testing CI
+        working-directory: ${{runner.workspace}}/build
         run: tree
 
       - name: Upload test results
         uses: actions/upload-artifact@v2
-        if: failure()
+#        if: failure()
         with:
           name: test_results_xml
           path: ${{runner.workspace}}/build/test-results/**/*.xml
