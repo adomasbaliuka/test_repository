@@ -51,21 +51,23 @@ jobs:
                 -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=--coverage -DCMAKE_C_FLAGS=--coverage
           cmake --build .
           ctest -V
+          pwd
           ls -a
+          tree
 
-      - name: Generate Lcov report
-        uses: daalbano/lcov-action@v1
-        with:
-          remove_patterns: 3rdparties,benchmarks
-
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload test results
-        uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: test_results_xml
-          path: ${{runner.workspace}}/build/tests/test-results/**/*.xml
+#      - name: Generate Lcov report
+#        uses: daalbano/lcov-action@v1
+#        with:
+#          remove_patterns: 3rdparties,benchmarks
+#
+#      - name: Coveralls
+#        uses: coverallsapp/github-action@master
+#        with:
+#          github-token: ${{ secrets.GITHUB_TOKEN }}
+#
+#      - name: Upload test results
+#        uses: actions/upload-artifact@v2
+#        if: failure()
+#        with:
+#          name: test_results_xml
+#          path: ${{runner.workspace}}/build/tests/test-results/**/*.xml
