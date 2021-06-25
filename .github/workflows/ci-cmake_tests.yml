@@ -46,7 +46,7 @@ jobs:
 
       - name: Upload test results
         uses: actions/upload-artifact@v2
-#        if: failure()
+        if: failure()
         with:
           name: test_results_xml
           path: ${{runner.workspace}}/build/tests/test-results/**/*.xml
