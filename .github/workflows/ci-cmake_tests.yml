@@ -39,10 +39,6 @@ jobs:
         working-directory: ${{runner.workspace}}/build
         run: cmake --build . --config $BUILD_TYPE
         
-#      - name: print tree for testing CI
-#        working-directory: ${{runner.workspace}}/build
-#        run: tree
-        
       - name: Test and generate code coverage
         working-directory: ${{runner.workspace}}/build
         run: |
@@ -51,6 +47,10 @@ jobs:
           lcov --zerocounters --directory .
           ctest -C $BUILD_TYPE
           gcovr --root ../ --xml-pretty --xml coverage.xml
+
+      - name: print tree for testing CI
+        working-directory: ${{runner.workspace}}/build
+        run: tree
 
       - name: Publish to codecov
         uses: codecov/codecov-action@v2
