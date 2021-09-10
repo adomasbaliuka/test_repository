@@ -47,3 +47,7 @@ target_link_libraries(unit_tests_test_proj
 
 include(GoogleTest)
 gtest_discover_tests(unit_tests_test_proj)
+
+if(ENABLE_COVERAGE)
+        target_compile_options(unit_tests_test_proj INTERFACE --coverage -O0 -g)
+endif()
