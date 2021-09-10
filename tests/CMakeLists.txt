@@ -27,6 +27,7 @@ target_compile_features(unit_tests_test_proj
 
 if(ENABLE_COVERAGE)
         target_compile_options(unit_tests_test_proj PUBLIC --coverage -O0 -g)
+        target_link_options(unit_tests_test_proj PUBLIC --coverage)
 endif()
 
 
