@@ -62,7 +62,7 @@ endif ()
 # Do this differently. Interface library (without sources) carries compiler flags.
 add_library(project_options INTERFACE)
 
-include(Sanitizers.cmake)
+include(Sanitizers)
 enable_sanitizers(project_options)  # adds coverage if specified by flag ENABLE_COVERAGE
 
 # ----------------------------------------------------------------------------------------------------------------------
