@@ -49,17 +49,18 @@ jobs:
           gcovr --root ../ --xml-pretty --xml coverage.xml
 
       - name: print tree for testing CI
-        working-directory: ${{runner.workspace}}/build
+        working-directory: ${{runner.workspace}}
         run: tree
 
       - name: Publish to codecov
         uses: codecov/codecov-action@v2
         with:
-          files: ./coverage.xml
+          files: ./build/coverage.xml
+          fail_ci_if_error: true
           
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
-          path: ./coverage.xml
-          fail_ci_if_error: true
+          path: ./build/coverage.xml
+          
           
