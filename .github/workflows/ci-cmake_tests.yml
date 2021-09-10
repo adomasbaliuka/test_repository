@@ -47,6 +47,8 @@ jobs:
           lcov --zerocounters --directory .
           ctest -C $BUILD_TYPE
           gcovr --root ../ --xml-pretty --xml coverage.xml
+          echo
+          cat ./coverage.xml # pring coverage information
 
       - name: print tree for testing CI
         working-directory: ${{runner.workspace}}
