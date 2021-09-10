@@ -13,6 +13,13 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+env:
+  BUILD_TYPE: RelWithDebInfo
+  
+defaults:
+  run:
+    shell: bash
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -24,51 +31,28 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
+      
       - name: Configure CMake
-        run: cmake -S $GITHUB_WORKSPACE -B ${{runner.workspace}}/build
+        run: cmake -S $GITHUB_WORKSPACE -B ${{runner.workspace}}/build -DCMAKE_BUILD_TYPE:STRING=$BUILD_TYPE -DENABLE_COVERAGE:BOOL=ON
 
       - name: Build
         working-directory: ${{runner.workspace}}/build
-        run: cmake --build .
-
-      - name: Test
-        working-directory: ${{runner.workspace}}/build
-        run: GTEST_OUTPUT=xml:test-results/ GTEST_COLOR=1 ctest -V
+        run: cmake --build . --config $BUILD_TYPE
         
-      - name: print tree for testing CI
+#      - name: print tree for testing CI
+#        working-directory: ${{runner.workspace}}/build
+#        run: tree
+        
+      - name: Test and generate code coverage
         working-directory: ${{runner.workspace}}/build
-        run: tree
-
-      - name: Configure CMake for coverage
-        run: cmake -S $GITHUB_WORKSPACE -B ${{runner.workspace}}/build-coverage -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=--coverage -DCMAKE_C_FLAGS=--coverage
-
-      - name: Generate code coverage
-        working-directory: ${{runner.workspace}}/build-coverage
         run: |
-          cmake --build .
-          ctest -V
-          pwd
-          ls -a
-          tree
+          set -x  # enable debugging in bash
+          sudo apt-get -qq -y install lcov gcovr
+          lcov --zerocounters --directory .
+          ctest -C $BUILD_TYPE
+          gcovr --root ../ --xml-pretty --xml coverage.xml
 
-#      - name: Generate Lcov report
-#        uses: daalbano/lcov-action@v1
-#        with:
-#          remove_patterns: 3rdparties,benchmarks
-#
-#      - name: Coveralls
-#        uses: coverallsapp/github-action@master
-#        with:
-#          github-token: ${{ secrets.GITHUB_TOKEN }}
-#
-#      - name: Upload test results
-#        uses: actions/upload-artifact@v2
-#        if: failure()
-#        with:
-#          name: test_results_xml
-#          path: ${{runner.workspace}}/build/tests/test-results/**/*.xml
+      - name: Publish to codecov
+        uses: codecov/codecov-action@v2
+        with:
+          files: ./build/coverage.xml
