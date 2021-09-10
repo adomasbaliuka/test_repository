@@ -55,9 +55,11 @@ jobs:
       - name: Publish to codecov
         uses: codecov/codecov-action@v2
         with:
-          files: ./build/coverage.xml
+          files: ./coverage.xml
           
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
-          path: coverage.xml
+          path: ./coverage.xml
+          fail_ci_if_error: true
+          
