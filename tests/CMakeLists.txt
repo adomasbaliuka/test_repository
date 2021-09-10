@@ -25,6 +25,10 @@ add_executable(unit_tests_test_proj test_main.cpp
 target_compile_features(unit_tests_test_proj
         PUBLIC cxx_std_17)
 
+if(ENABLE_COVERAGE)
+        target_compile_options(unit_tests_test_proj PUBLIC --coverage -O0 -g)
+endif()
+
 
 target_include_directories(unit_tests_test_proj
         PRIVATE
@@ -48,6 +52,4 @@ target_link_libraries(unit_tests_test_proj
 include(GoogleTest)
 gtest_discover_tests(unit_tests_test_proj)
 
-if(ENABLE_COVERAGE)
-        target_compile_options(unit_tests_test_proj INTERFACE --coverage -O0 -g)
-endif()
+
