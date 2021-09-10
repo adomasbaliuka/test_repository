@@ -13,6 +13,9 @@ add_library(TestLib
 target_compile_features(TestLib PUBLIC cxx_std_17)
 
 target_link_libraries(TestLib
+        PRIVATE
+        project_options  # No sources, only compiler flags, etc.
+        
         PUBLIC # propagate all header locations to tests and demo.
 
         )
