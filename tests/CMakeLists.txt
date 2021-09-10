@@ -25,10 +25,10 @@ add_executable(unit_tests_test_proj test_main.cpp
 target_compile_features(unit_tests_test_proj
         PUBLIC cxx_std_17)
 
-if(ENABLE_COVERAGE)
-        target_compile_options(unit_tests_test_proj PUBLIC --coverage -O0 -g)
-        target_link_options(unit_tests_test_proj PUBLIC --coverage)
-endif()
+# if(ENABLE_COVERAGE)
+#        target_compile_options(unit_tests_test_proj PUBLIC --coverage -O0 -g)
+#        target_link_options(unit_tests_test_proj PUBLIC --coverage)
+# endif()
 
 
 target_include_directories(unit_tests_test_proj
@@ -39,6 +39,9 @@ target_include_directories(unit_tests_test_proj
 
 target_link_libraries(unit_tests_test_proj
         PRIVATE
+        # No sources, only compiler options etc.
+        project_options
+        
         # Needed for testing:
         #        ${GTEST_LIBRARIES} # macro provided by find_package(GTest REQUIRED) earlier
         #        ${GTEST_MAIN_LIBRARIES} # macro provided by find_package(GTest REQUIRED) earlier
