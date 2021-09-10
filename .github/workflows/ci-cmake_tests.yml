@@ -46,7 +46,7 @@ jobs:
           sudo apt-get -qq -y install lcov gcovr
           lcov --zerocounters --directory .
           ctest -C $BUILD_TYPE
-          gcovr -v --root ../../ --xml-pretty --xml coverage.xml
+          gcovr -v --root ../ --xml-pretty --xml coverage.xml
           echo
           cat ./coverage.xml # pring coverage information
 
