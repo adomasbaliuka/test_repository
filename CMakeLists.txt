@@ -57,6 +57,14 @@ endif ()
 # Pass VERBOSE=1 to make to see all the options used.
 #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O2")
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
+
+# TODO remove the stuff above.
+# Do this differently. Interface library (without sources) carries compiler flags.
+add_library(project_options INTERFACE)
+
+include(Sanitizers.cmake)
+enable_sanitizers(project_options)  # adds coverage if specified by flag ENABLE_COVERAGE
+
 # ----------------------------------------------------------------------------------------------------------------------
 # ------------------------------------ GET VERSION FROM GIT AND INCLUDE IN BINARIES ------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
