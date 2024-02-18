@@ -8,6 +8,7 @@
 
 #include <string>
 
+
 namespace TestProj::Version {
     std::string git_sha1();
 
