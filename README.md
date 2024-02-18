@@ -3,7 +3,7 @@
 
 # test_repository
 Repository to test and play around with git and GitHub.
-Uses CMake and GTest to build and run tests.
+Uses CMake and GTest to build and run tests for C++ code.
 
 # Attributions
 - Setting up CI with GitHub actions: https://github.com/GHF/googletest-ci
