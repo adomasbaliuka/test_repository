@@ -2,7 +2,8 @@
 [![codecov](https://codecov.io/gh/adomasbaliuka/test_repository/branch/main/graph/badge.svg?token=49SR4UP8X4)](https://codecov.io/gh/adomasbaliuka/test_repository)
 
 # test_repository
-Repository to test and play around with git and GitHub. Uses CMake and GTest to build and run tests.
+Repository to test and play around with git and GitHub.
+Uses CMake and GTest to build and run tests.
 
 # Attributions
 - Setting up CI with GitHub actions: https://github.com/GHF/googletest-ci
